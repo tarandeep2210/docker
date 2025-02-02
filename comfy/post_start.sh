@@ -1,6 +1,12 @@
 #!/bin/sh
 echo "The time is: $(date)"
 
+# Start code-server
+echo "Starting code-server..."
+code-server --auth none --port 8189 --host 0.0.0.0 &
+echo "Code-server started successfully"
+
+
 # Run comfyUI
 echo "Starting ComfyUI..."
 

@@ -7,8 +7,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git curl && \
+    git curl git-lfs unzip vim nodejs \
+    npm && \
     rm -rf /var/lib/apt/lists/*
+
+
+    # Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
     # Clone the ComfyUI repository
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
@@ -22,7 +27,7 @@ RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git custom_nodes/ComfyUI-Manager
 
 # Expose the default ComfyUI port
-EXPOSE 8188
+EXPOSE 8189 8190
 
 # Start Scripts
 COPY post_start.sh /post_start.sh
